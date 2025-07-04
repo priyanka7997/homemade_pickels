@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}Checkout{% endblock %}
+{% block head %}
+    <style>
+        .checkout-section {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        .checkout-section h2 {
+            color: #2ecc71;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .checkout-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+        .checkout-table th, .checkout-table td {
+            padding: 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .checkout-table th {
+            background: #2ecc71;
+            color: white;
+            font-size: 1.1rem;
+        }
+        .checkout-table td {
+            font-size: 1rem;
+            color: #333;
+        }
+        .checkout-table .total-row td {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        .empty-cart {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin: 4rem 0;
+        }
+        .checkout-section form {
+            text-align: center;
+        }
+        @media (max-width: 768px) {
+            .checkout-section {
+                padding: 1.5rem;
+            }
+            .checkout-table th, .checkout-table td {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+            .checkout-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="checkout-section">
+        <h2>Checkout</h2>
+        {% if cart_items %}
+            <table class="checkout-table">
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+                {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>₹{{ "%.2f" % item.product.price }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>₹{{ "%.2f" % (item.product.price * item.quantity) }}</td>
+                    </tr>
+                {% endfor %}
+                <tr class="total-row">
+                    <td colspan="3"><strong>Total</strong></td>
+                    <td><strong>₹{{ "%.2f" % total }}</strong></td>
+                </tr>
+            </table>
+            <form method="POST">
+                <button type="submit" class="btn">Place Order</button>
+            </form>
+        {% else %}
+            <p class="empty-cart">Your cart is empty.</p>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}Cart{% endblock %}
+{% block head %}
+    <style>
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+        .cart-table th, .cart-table td {
+            padding: 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .cart-table th {
+            background: #2ecc71;
+            color: white;
+            font-size: 1.1rem;
+        }
+        .cart-table td {
+            font-size: 1rem;
+            color: #333;
+        }
+        .cart-table .total-row td {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        h2 {
+            color: #2ecc71;
+            text-align: center;
+            font-size: 2rem;
+            margin: 2rem 0;
+        }
+        .empty-cart {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin: 4rem 0;
+        }
+        .checkout-btn {
+            display: block;
+            width: fit-content;
+            margin: 2rem auto;
+        }
+        @media (max-width: 768px) {
+            .cart-table th, .cart-table td {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <h2>Your Cart</h2>
+    {% if cart_items %}
+        <table class="cart-table">
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+            {% for item in cart_items %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>₹{{ "%.2f" % item.product.price }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>₹{{ "%.2f" % (item.product.price * item.quantity) }}</td>
+                    <td><a href="{{ url_for('remove_from_cart', cart_id=item.id) }}" class="btn">Remove</a></td>
+                </tr>
+            {% endfor %}
+            <tr class="total-row">
+                <td colspan="3"><strong>Total</strong></td>
+                <td><strong>₹{{ "%.2f" % total }}</strong></td>
+                <td></td>
+            </tr>
+        </table>
+        <a href="{{ url_for('checkout') }}" class="btn checkout-btn">Proceed to Checkout</a>
+    {% else %}
+        <p class="empty-cart">Your cart is empty.</p>
+    {% endif %}
+{% endblock %}

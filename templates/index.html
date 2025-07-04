@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block head %}
+    <style>
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .category-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+        }
+        .category-card h3 {
+            color: #2ecc71;
+            font-size: 1.5rem;
+            margin: 0.5rem 0;
+        }
+        .category-card p {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        h2 {
+            color: #2ecc71;
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        @media (max-width: 768px) {
+            .category-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <h2>Welcome to Pickles & Snacks</h2>
+    <div class="category-grid">
+        <div class="category-card">
+            <h3>Veg Pickles</h3>
+            <p>Explore our delicious vegetarian pickles, crafted with fresh ingredients.</p>
+            <a href="{{ url_for('veg_pickles') }}" class="btn">View Veg Pickles</a>
+        </div>
+        <div class="category-card">
+            <h3>Non-veg Pickles</h3>
+            <p>Discover our bold non-vegetarian pickles with unique flavors.</p>
+            <a href="{{ url_for('non_veg_pickles') }}" class="btn">View Non-veg Pickles</a>
+        </div>
+        <div class="category-card">
+            <h3>Snacks</h3>
+            <p>Enjoy our crispy and flavorful Indian snacks, perfect for any time.</p>
+            <a href="{{ url_for('snacks') }}" class="btn">View Snacks</a>
+        </div>
+    </div>
+{% endblock %}
