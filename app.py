@@ -21,8 +21,8 @@ db = SQLAlchemy(app)
 # AWS Config
 AWS_REGION = os.getenv('AWS_REGION')
 SNS_TOPIC_ARN = os.getenv('SNS_TOPIC_ARN')
-sns = boto3.client('sns', region_name='ap-south-1')
-dynamodb = boto3.resource('dynamodb', region_name='ap-south-1')
+sns = boto3.client('sns', region_name='AWS_REGION')
+dynamodb = boto3.resource('dynamodb', region_name='AWS_REGION')
 users_table = dynamodb.Table('Users')
 orders_table = dynamodb.Table('Orders')
 products_table = dynamodb.Table('Products')
@@ -30,7 +30,7 @@ cart_table = dynamodb.Table('Cart')
 
 # Email Config
 EMAIL_ADDRESS = os.getenv('228x1a1240@khitguntur.ac.in')
-EMAIL_PASSWORD = os.getenv('znsq vwkt gjlw zijw')
+EMAIL_PASSWORD = os.getenv('')
 
 # Helper Functions
 def send_email(subject, body, to):
