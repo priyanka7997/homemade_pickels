@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Contact Us{% endblock %}
+{% block head %}
+    <style>
+        .contact-section {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        .contact-section h2 {
+            color: #2ecc71;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .contact-section p {
+            color: #666;
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .contact-section form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .contact-section input, .contact-section textarea {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        .contact-section input:focus, .contact-section textarea:focus {
+            border-color: #2ecc71;
+            outline: none;
+            box-shadow: 0 0 8px rgba(46,204,113,0.2);
+        }
+        .contact-section textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .contact-section button {
+            margin-top: 1rem;
+        }
+        @media (max-width: 768px) {
+            .contact-section {
+                padding: 1.5rem;
+            }
+            .contact-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="contact-section">
+        <h2>Contact Us</h2>
+        <p>Have a question or feedback? We'd love to hear from you!</p>
+        <form method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit" class="btn">Send Message</button>
+        </form>
+    </div>
+{% endblock %}
